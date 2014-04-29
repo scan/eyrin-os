@@ -1,4 +1,4 @@
-build/
 kernel.img
 kernel.list
 kernel.map
+kernel.elf
