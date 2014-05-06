@@ -21,9 +21,13 @@ start:
 2:
 	cmp	r4, r9
 	blo	1b
+
+    blx _init
  
 	ldr	r3, =main
 	blx	r3
+
+    blx _fini
 halt:
 	wfe
 	b	halt

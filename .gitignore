@@ -2,3 +2,6 @@ kernel.img
 kernel.list
 kernel.map
 kernel.elf
+
+mnt/
+card.img

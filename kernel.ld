@@ -11,6 +11,24 @@ SECTIONS
         KEEP(*(.text.boot))
         *(.text)
     }
+
+    .init_array :
+    {
+        ./build/crti.o(.init_array)
+        KEEP (*(SORT(EXCLUDE_FILE(crti.o crtn.o) .init_array.*)))
+        KEEP (*(EXCLUDE_FILE(crti.o crtn.o) .init_array))
+        ./build/crtn.o(.init_array)
+    }
+
+    /* Include the list of termination functions sorted. */
+    .fini_array :
+    {
+        ./build/crti.o(.fini_array)
+        KEEP (*(SORT(EXCLUDE_FILE(crti.o crtn.o) .fini_array.*)))
+        KEEP (*(EXCLUDE_FILE(crti.o crtn.o) .fini_array))
+        ./build/crtn.o(.fini_array)
+    }
+
     . = ALIGN(4096); /* align to page size */
     _text_end = .;
  
