@@ -1,5 +1,5 @@
 #include <stdint.h>
-#include <uart.h>
+#include <postman.h>
 
 #define UNUSED(x) (void)(x)
 
@@ -10,15 +10,6 @@ int main(long r0, long r1, long atags) {
     UNUSED(r0);
     UNUSED(r1);
     UNUSED(atags);
-
-    uart_init();
- 
-    uart_puts(hello);
- 
-    // Wait a bit
-    for(volatile int i = 0; i < 10000000; ++i) { }
- 
-    uart_puts(halting);
 
     return 0;
 }

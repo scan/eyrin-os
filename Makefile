@@ -34,7 +34,7 @@ CXX			:= $(ARMGNU)-g++
 AS			:= $(ARMGNU)-as
 
 # object files
-OBJS = $(OBJDIR)boot.o $(OBJDIR)main.o $(OBJDIR)uart.o
+OBJS = $(OBJDIR)boot.o $(OBJDIR)main.o $(OBJDIR)postman.o $(OBJDIR)uart.o
 
 CRTI_OBJ=$(OBJDIR)crti.o
 CRTBEGIN_OBJ:=$(shell $(CC) $(CFLAGS) -print-file-name=crtbegin.o)
@@ -65,6 +65,9 @@ clean:
  
 dist-clean: clean
 	$(RM) -f *.d card.img
+
+start: dist
+	qemu-system-arm -cpu arm1176 -m 512 -M raspi -no-reboot -serial stdio -hda card.img
 
 dist: mnt card.img firmware/bootcode.bin firmware/start.elf kernel.img
 	mkdir -p ./mnt
